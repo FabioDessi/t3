@@ -1,18 +1,27 @@
 <template>
   <div id="app">
-    <MessageBoard :show="true"
+    <MessageBoard :show="false"
                   message="Testing" />
+    <GameBoard :board="board"/>
   </div>
 </template>
 
 <script>
+  import { store } from "./store";
   import MessageBoard from './components/MessageBoard';
+  import GameBoard from './components/GameBoard';
 
   export default {
     name: 'App',
     components: {
-      MessageBoard
-    }
+      MessageBoard,
+      GameBoard
+    },
+    computed: {
+      board() {
+        return store.board
+      }
+    },
   }
 </script>
 

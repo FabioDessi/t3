@@ -12,7 +12,8 @@
     name: 'MessageBoard',
     props: {
       message: {
-        type: String
+        type: String,
+        required: true
       },
       show: {
         type: Boolean,
