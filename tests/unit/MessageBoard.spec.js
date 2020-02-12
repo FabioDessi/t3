@@ -3,7 +3,7 @@ import MessageBoard from '../../src/components/MessageBoard.vue'
 
 describe('MessageBoard.vue', () => {
   const propsData = {
-    message: 'baz',
+    gameWon: {index: null, player: 'Tie Game'},
     show: false
   };
 
@@ -16,7 +16,7 @@ describe('MessageBoard.vue', () => {
     propsData.show = true;
     const wrapper = shallowMount(MessageBoard, { propsData });
     expect(wrapper.find('h1').exists()).toBe(true);
-    expect(wrapper.find('.message-board__header').text()).toEqual(propsData.message)
+    expect(wrapper.find('.message-board__header').text()).toEqual(propsData.gameWon.player)
   });
 
   it('renders a button with restart game value', () => {
@@ -24,5 +24,13 @@ describe('MessageBoard.vue', () => {
     const wrapper = shallowMount(MessageBoard, { propsData });
     expect(wrapper.find('button').exists()).toBe(true);
     expect(wrapper.find('.message-board__button').text()).toEqual('Restart game')
+  });
+
+  it('calls onClickHandler method when button is pressed', () => {
+    propsData.show =  true;
+    const onClickHandler = jest.fn();
+    const wrapper = shallowMount(MessageBoard, { propsData, methods: { onClickHandler } });
+    wrapper.find('button').trigger('click');
+    expect(onClickHandler).toHaveBeenCalled();
   })
 });
