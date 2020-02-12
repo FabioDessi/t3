@@ -9,9 +9,10 @@ const store = Vue.observable({
   },
 
   startGame() {
-    this.state.gameOver = false;
     this.state.board = Array.from(Array(9).keys());
-    this.state.gameWon = Object.assign({})
+    this.state.gameWon = Object.assign({});
+    this.state.gameOver = false;
+    this.state.playerTurn = true;
   },
 
   turn(cell, player) {
