@@ -1,24 +1,10 @@
-# t3
+# tic tac toe vue.js
 
-## Project setup
-```
-npm install
-```
+### Description
+Basic vuejs with 2 components (MessageBoard and GameBoard), all the states are managed with a simplified form of Vuex (I didn't though Vuex was needed)
+unit testing for isolated component and integration testing for App
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+The minimax algorithm seems more than enough to complete the task, for this reason i've skipped the backend part with database.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Sources
+[Minimax algorithm](https://www.freecodecamp.org/news/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37/).
