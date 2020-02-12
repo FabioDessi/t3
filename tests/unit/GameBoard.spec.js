@@ -34,7 +34,6 @@ describe('GameBoard.vue', () => {
     const wrapper = shallowMount(GameBoard, { propsData, methods: { onClickHandler }});
     const cell = wrapper.findAll('span').at(0);
     cell.trigger('click');
-    expect(wrapper.emitted()).toHaveProperty('click');
     expect(onClickHandler).toHaveBeenCalled();
   });
 });
