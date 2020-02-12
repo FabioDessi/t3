@@ -6,33 +6,41 @@
       <td class="game-board__column"
           v-for="(cell, i) in board.slice( i * 3, (i + 1) * 3)"
           :key="i" >
-        <span v-if="cell !== 0">
-          {{ cell }}
-        </span>
+      <span v-if="typeof cell !== 'number'">
+        {{ cell }}
+      </span>
         <span v-else
               v-on:click="onClickHandler"
               :id="(group * 3) + i">
-        </span>
+      </span>
       </td>
     </tr>
   </table>
 </template>
 <script>
-  import { mutations } from '../store';
+  import store from '../store';
 
   export default {
     name: 'GameBoard',
     methods: {
       onClickHandler: function (event) {
-        mutations.turn(Number.parseInt(event.target.id, 10));
+        if(!this.gameOver && this.playerTurn) store.turn(Number.parseInt(event.target.id, 10), 'O');
       }
     },
     props: {
       board: {
         type: Array,
         required: true
+      },
+      gameOver: {
+        type: Boolean,
+        required: true
+      },
+      playerTurn: {
+        type: Boolean,
+        required: true
       }
-    },
+    }
   }
 </script>
 <style>
@@ -40,8 +48,9 @@
     border-collapse: collapse;
     position: absolute;
     left: 50%;
+    top: 50%;
     margin-left: -155px;
-    top: 50px;
+    margin-top: -155px;
   }
 
   .game-board__column {

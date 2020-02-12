@@ -4,9 +4,13 @@ import GameBoard from '../../src/components/GameBoard';
 describe('GameBoard.vue', () => {
   const propsData = {
     board: Array.from(Array(9).keys()),
+    gameOver: false,
+    playerTurn: true,
+
   };
   propsData.board[1] = 'X';
   propsData.board[2] = 'O';
+  const onClickHandler = jest.fn();
 
   it('renders a table with 3 rows and 9 columns', () => {
     const wrapper = shallowMount(GameBoard, { propsData });
@@ -26,11 +30,11 @@ describe('GameBoard.vue', () => {
     expect(wrapper.findAll('td').at(2).text()).toBe('O');
   });
 
-  it('change value of empty cell on click', async() => {
-    const wrapper = shallowMount(GameBoard, { propsData });
-    const cell = wrapper.findAll('td').at(0);
+  it('empty column have click event listener and calls onCLickHandler method', async() => {
+    const wrapper = shallowMount(GameBoard, { propsData, methods: { onClickHandler }});
+    const cell = wrapper.findAll('span').at(0);
     cell.trigger('click');
-    await wrapper.vm.$nextTick();
-    expect(cell.text()).toBe('O')
-  })
+    expect(wrapper.emitted()).toHaveProperty('click');
+    expect(onClickHandler).toHaveBeenCalled();
+  });
 });
